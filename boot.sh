@@ -8,5 +8,8 @@ docker run -it --rm \
     -e VIVADO_VER=2018.2 \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v $HOME/docker/userhome:$HOME \
+    --privileged \
+    -v /dev/bus/usb:/dev/bus/usb \
+    -v /sys:/sys:ro \
     -w $HOME \
-    vivado2018.3 /bin/bash
+    vivado2018.2 /bin/bash

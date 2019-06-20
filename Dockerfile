@@ -1,6 +1,7 @@
 FROM ubuntu16
 LABEL maintainer "ittou <VYG07066@gmail.com>"
 
+ENV VIVADO_VER=2018.2
 ARG URIS=smb://192.168.103.223/Share/Vivado2018.2/
 ARG VIVADO_MAIN=Xilinx_Vivado_SDK_2018.2_0614_1954.tar.gz
 ARG VIVADO_UPDATE1=Xilinx_Vivado_SDx_Update_2018.2.1_0726_1815.tar.gz
