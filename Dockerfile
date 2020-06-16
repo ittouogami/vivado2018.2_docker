@@ -1,8 +1,9 @@
 FROM ubuntu16
 LABEL maintainer "ittou <VYG07066@gmail.com>"
 ENV DEBIAN_FRONTEND noninteractive
-ENV VIVADO_VER="2018.2"
-ARG URIS=smb://192.168.103.223/Share/Vivado2018.2/
+ARG VIVADO_VER="2018.2"
+ARG IP=192.168.0.200
+ARG URIS=smb://${IP}/Share/Vivado${VIVADO_VER}/
 ARG VIVADO_MAIN=Xilinx_Vivado_SDK_2018.2_0614_1954.tar.gz
 ARG VIVADO_UPDATE1=Xilinx_Vivado_SDx_Update_2018.2.1_0726_1815.tar.gz
 ARG VIVADO_UPDATE2=Xilinx_Vivado_SDx_Update_2018.2.2_1001_1805.tar.gz
@@ -16,13 +17,10 @@ RUN \
           locales && locale-gen en_US.UTF-8 && \
   apt-get -y -qq --no-install-recommends install \
           software-properties-common \
-          build-essential \
           binutils \
-          ncurses-dev \
           u-boot-tools \
           file tofrodos \
           iproute2 \
-          gawk \
           net-tools \
           libncurses5-dev \
           tftp \
@@ -46,11 +44,9 @@ RUN \
           libglib2.0-dev \
           libtool-bin \
           cpio \
-          python \
-          python3 \
           pkg-config \
-          git \
           ocl-icd-opencl-dev \
+          smbclient \
           libjpeg62-dev && \
   dpkg --add-architecture i386 && \
   apt-get update && \
@@ -61,21 +57,21 @@ RUN \
   apt-get autoremove && \
   rm -rf /var/lib/apt/lists/* && \
 #Main
-  curl -u guest ${URIS}${VIVADO_MAIN} | tar zx --strip-components=1 -C /VIVADO-INSTALLER && \
+  smbget -O -a guest ${URIS}${VIVADO_MAIN} | gzip -dcq - | tar x --strip-components=1 -C /VIVADO-INSTALLER && \
   /VIVADO-INSTALLER/xsetup \
     --agree 3rdPartyEULA,WebTalkTerms,XilinxEULA \
     --batch Install \
     --config /VIVADO-INSTALLER/install_config_main.txt && \
   rm -rf /VIVADO-INSTALLER && \
 #Update1
-  curl -u guest ${URIS}${VIVADO_UPDATE1} | tar zx --strip-components=1 -C /VIVADO-INSTALLER_UP1 && \
+  smbget -O -a guest ${URIS}${VIVADO_UPDATE1} | gzip -dcq - | tar x --strip-components=1 -C /VIVADO-INSTALLER_UP1 && \
   /VIVADO-INSTALLER_UP1/xsetup \
     --agree 3rdPartyEULA,WebTalkTerms,XilinxEULA \
     --batch Install \
     --config /VIVADO-INSTALLER_UP1/install_config_up1.txt && \
   rm -rf /VIVADO-INSTALLER_UP1 && \
 #Update2
-  curl -u guest ${URIS}${VIVADO_UPDATE2} | tar zx --strip-components=1 -C /VIVADO-INSTALLER_UP2 && \
+  smbget -O -a guest ${URIS}${VIVADO_UPDATE2} | gzip -dcq - | tar x --strip-components=1 -C /VIVADO-INSTALLER_UP2 && \
   /VIVADO-INSTALLER_UP2/xsetup \
     --agree 3rdPartyEULA,WebTalkTerms,XilinxEULA \
     --batch Install \
