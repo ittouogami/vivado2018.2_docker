@@ -19,9 +19,9 @@ RUN \
           software-properties-common \
           binutils \
           u-boot-tools \
-          file tofrodos \
+          file \
+          tofrodos \
           iproute2 \
-          net-tools \
           libncurses5-dev \
           tftp \
           tftpd-hpa \
@@ -37,7 +37,6 @@ RUN \
           libtool \
           socat \
           autoconf \
-          unzip \
           texinfo \
           gcc-multilib \
           libsdl1.2-dev \
