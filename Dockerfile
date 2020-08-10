@@ -56,21 +56,21 @@ RUN \
   apt-get autoremove && \
   rm -rf /var/lib/apt/lists/* && \
 #Main
-  smbget -O -a guest ${URIS}${VIVADO_MAIN} | gzip -dcq - | tar x --strip-components=1 -C /VIVADO-INSTALLER && \
+  smbget -O -a ${URIS}${VIVADO_MAIN} | gzip -dcq - | tar x --strip-components=1 -C /VIVADO-INSTALLER && \
   /VIVADO-INSTALLER/xsetup \
     --agree 3rdPartyEULA,WebTalkTerms,XilinxEULA \
     --batch Install \
     --config /VIVADO-INSTALLER/install_config_main.txt && \
   rm -rf /VIVADO-INSTALLER && \
 #Update1
-  smbget -O -a guest ${URIS}${VIVADO_UPDATE1} | gzip -dcq - | tar x --strip-components=1 -C /VIVADO-INSTALLER_UP1 && \
+  smbget -O -a ${URIS}${VIVADO_UPDATE1} | gzip -dcq - | tar x --strip-components=1 -C /VIVADO-INSTALLER_UP1 && \
   /VIVADO-INSTALLER_UP1/xsetup \
     --agree 3rdPartyEULA,WebTalkTerms,XilinxEULA \
     --batch Install \
     --config /VIVADO-INSTALLER_UP1/install_config_up1.txt && \
   rm -rf /VIVADO-INSTALLER_UP1 && \
 #Update2
-  smbget -O -a guest ${URIS}${VIVADO_UPDATE2} | gzip -dcq - | tar x --strip-components=1 -C /VIVADO-INSTALLER_UP2 && \
+  smbget -O -a ${URIS}${VIVADO_UPDATE2} | gzip -dcq - | tar x --strip-components=1 -C /VIVADO-INSTALLER_UP2 && \
   /VIVADO-INSTALLER_UP2/xsetup \
     --agree 3rdPartyEULA,WebTalkTerms,XilinxEULA \
     --batch Install \
