@@ -80,5 +80,5 @@ RUN \
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-CMD ["/bin/bash", "-c", "source /opt/Xilinx/Vivado/${VIVADO_VER}/settings64.sh;/bin/bash -l"]
+CMD ["/bin/bash", "-c", "source /opt/Xilinx/Vivado/${VIVADO_VER}/settings64.sh;/bin/bash"]
 
